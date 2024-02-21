@@ -5,7 +5,7 @@ abstract class slGoLBoard {
     private int NUM_ROWS;
     private int NUM_COLS;
 
-    private boolean[][]  cellArrayA, cellArrayB, liveCellArray, nextCellArray;
+    protected boolean[][]  cellArrayA, cellArrayB, liveCellArray, nextCellArray;
 
     protected slGoLBoard(int numRows, int numCols) {
         NUM_ROWS = numRows;
@@ -92,6 +92,21 @@ abstract class slGoLBoard {
         return;
     }  //  void copyLiveToNext()
 
+    /*from discussion*/
+    protected void copyNextToLive() {
+        int num_rows = nextCellArray.length;
+        int num_cols = nextCellArray[0].length;
+        for (int row = 0; row < num_rows; ++row) {
+
+            System.arraycopy(nextCellArray[row], 0, liveCellArray[row], 0, num_cols);
+
+        }
+
+        return;
+
+    }  //  void copyNexttoLive()
+
+
     protected void printGoLBoard() {
         for (boolean[] my_row : liveCellArray) {
             for (boolean my_val : my_row) {
@@ -106,9 +121,8 @@ abstract class slGoLBoard {
     }  //  void printGoLBoard()
 
     // UNCOMMENT NEXT TWO LINES AND CHANGE THE ACCESS LEVELS OF THE FUNCTIONS:
-    protected int countLiveTwoDegreeNeighbors(int row, int col){
-        return 0;
-    }
+    /*Will call the derived class's method*/
+    abstract int countLiveTwoDegreeNeighbors(int row, int col);
 
     // return how many live cells are in the updated board
     /*

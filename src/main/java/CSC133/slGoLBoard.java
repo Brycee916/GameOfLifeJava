@@ -83,16 +83,6 @@ abstract class slGoLBoard {
         }
     }  //  void setAllCells()
 
-    protected void copyLiveToNext() {
-        for (int row = 0; row < liveCellArray.length; ++row){
-            for (int col = 0; col < liveCellArray[row].length; ++col) {
-                nextCellArray[row][col] = liveCellArray[row][col];
-            }
-        }
-        return;
-    }  //  void copyLiveToNext()
-
-    /*from discussion*/
     protected void copyNextToLive() {
         int num_rows = nextCellArray.length;
         int num_cols = nextCellArray[0].length;
@@ -101,7 +91,6 @@ abstract class slGoLBoard {
             System.arraycopy(nextCellArray[row], 0, liveCellArray[row], 0, num_cols);
 
         }
-
         return;
 
     }  //  void copyNexttoLive()
@@ -132,37 +121,7 @@ abstract class slGoLBoard {
         3. Live Two Degree Neighbors > 3 --> Kill
         4. Dead with Live Two Degree Neighbors == 3 --> Alive again
      */
-    protected int updateNextCellArray(){
-        int retVal = 0;
-
-        int nln = 0;  // Number Live Neighbors
-        boolean ccs = true; // Current Cell Status
-        for (int row = 0; row < NUM_ROWS; ++row){
-            for (int col = 0; col < NUM_COLS; ++col) {
-                ccs = liveCellArray[row][col];
-                nln = countLiveTwoDegreeNeighbors(row, col);
-                if (!ccs && nln == 3) {
-                    nextCellArray[row][col] = true;
-                    ++retVal;
-                } else {
-                    // Current Cell Status is true
-                    if (nln < 2 || nln > 3) {
-                        nextCellArray[row][col] = false;
-                    } else {
-                        // nln == 2 || nln == 3
-                        nextCellArray[row][col] = true;
-                        ++retVal;
-                    }
-                }
-            }  // for (int row = 0; ...)
-        }  //  for (int col = 0; ...)
-
-        boolean[][] tmp = liveCellArray;
-        liveCellArray = nextCellArray;
-        nextCellArray = tmp;
-
-        return retVal;
-    }
+    abstract int updateNextCellArray();
 
 }  //  public class slGoLBoard
 

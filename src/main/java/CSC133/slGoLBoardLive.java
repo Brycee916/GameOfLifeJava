@@ -1,8 +1,8 @@
 package csc133;
 
 public class slGoLBoardLive extends slGoLBoard{
-    int max_rows;
-    int max_columns;
+    private int max_rows;
+    private int max_columns;
 
     public slGoLBoardLive(int numRows, int numCols) {
         super(numRows, numCols);
@@ -37,8 +37,8 @@ public class slGoLBoardLive extends slGoLBoard{
         super.setAllCells(value);
     }  //  void setAllCells()
     @Override
-    public void copyLiveToNext(){
-        super.copyLiveToNext();
+    public void copyNextToLive(){
+        super.copyNextToLive();
     }
     @Override
     public void printGoLBoard(){
@@ -263,6 +263,34 @@ public class slGoLBoardLive extends slGoLBoard{
         return my_count;
     }
     protected int updateNextCellArray(){
-        return super.updateNextCellArray();
+        int retVal = 0;
+
+        int nln = 0;  // Number Live Neighbors
+        boolean ccs = true; // Current Cell Status
+        for (int row = 0; row < max_rows; ++row){
+            for (int col = 0; col < max_columns; ++col) {
+                ccs = liveCellArray[row][col];
+                nln = countLiveTwoDegreeNeighbors(row, col);
+                if (!ccs && nln == 3) {
+                    nextCellArray[row][col] = true;
+                    ++retVal;
+                } else {
+                    // Current Cell Status is true
+                    if (nln < 2 || nln > 3) {
+                        nextCellArray[row][col] = false;
+                    } else {
+                        // nln == 2 || nln == 3
+                        nextCellArray[row][col] = true;
+                        ++retVal;
+                    }
+                }
+            }  // for (int row = 0; ...)
+        }  //  for (int col = 0; ...)
+
+        boolean[][] tmp = liveCellArray;
+        liveCellArray = nextCellArray;
+        nextCellArray = tmp;
+
+        return retVal;
     }
 }

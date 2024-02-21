@@ -68,35 +68,193 @@ public class slGoLBoardLive extends slGoLBoard{
             if(liveCellArray[row+1][max_columns-1] == true){
                 my_count++;
             }
+            for(int i = row; i <= row+1; i++){
+                for(int j = col; j <= col+1; j++){
+                    if(i == row && j == col){
+                        continue;
+                    }
+                    if(liveCellArray[i][j] == true){
+                        my_count++;
+                    }
+                }
+            }
         }
         else if(prev_row < 0 && next_col >= max_columns){//top right corner
-
+            if(liveCellArray[max_rows-1][0] == true){
+                my_count++;
+            }
+            if(liveCellArray[max_rows-1][col-1] == true){
+                my_count++;
+            }
+            if(liveCellArray[max_rows-1][col] == true){
+                my_count++;
+            }
+            if(liveCellArray[row][0] == true){
+                my_count++;
+            }
+            if(liveCellArray[row+1][0] == true){
+                my_count++;
+            }
+            for(int i = row; i <= row+1; i++){
+                for(int j = col-1; j <= col; j++){
+                    if(i == row && j == col){
+                        continue;
+                    }
+                    if(liveCellArray[i][j] == true){
+                        my_count++;
+                    }
+                }
+            }
         }
         else if(prev_col < 0 && next_row >= max_rows){//bottom left corner
-
+            if(liveCellArray[0][max_columns-1] == true){
+                my_count++;
+            }
+            if(liveCellArray[0][col] == true){
+                my_count++;
+            }
+            if(liveCellArray[0][col+1] == true){
+                my_count++;
+            }
+            if(liveCellArray[row-1][max_columns-1] == true){
+                my_count++;
+            }
+            if(liveCellArray[row][max_columns-1] == true){
+                my_count++;
+            }
+            for(int i = row-1; i <= row; i++){
+                for(int j = col; j <= col+1; j++){
+                    if(i == row && j == col){
+                        continue;
+                    }
+                    if(liveCellArray[i][j] == true){
+                        my_count++;
+                    }
+                }
+            }
         }
         else if(next_row >= max_rows && next_col >= max_columns){//bottom right corner
-
+            if(liveCellArray[0][0] == true){
+                my_count++;
+            }
+            if(liveCellArray[0][col-1] == true){
+                my_count++;
+            }
+            if(liveCellArray[0][col] == true){
+                my_count++;
+            }
+            if(liveCellArray[row-1][0] == true){
+                my_count++;
+            }
+            if(liveCellArray[row][0] == true){
+                my_count++;
+            }
+            for(int i = row-1; i <= row; i++){
+                for(int j = col-1; j <= col; j++){
+                    if(i == row && j == col){
+                        continue;
+                    }
+                    if(liveCellArray[i][j] == true){
+                        my_count++;
+                    }
+                }
+            }
         }
-        else if(prev_row < 0){//left edge
-
+        else if(prev_row < 0){//upper edge
+            for(int i = row; i <= row+1; i++){
+                for(int j = col-1; j <= col+1; j++){
+                    if(i == row && j == col){
+                        continue;
+                    }
+                    if(liveCellArray[i][j] == true){
+                        my_count++;
+                    }
+                }
+            }
+            //check the very top 3 - other side bottom 3
+            if(liveCellArray[max_rows-1][col-1] == true){
+                my_count++;
+            }
+            if(liveCellArray[max_rows-1][col] == true){
+                my_count++;
+            }
+            if(liveCellArray[max_rows-1][col+1] == true){
+                my_count++;
+            }
         }
-        else if(prev_col < 0){//upper edge
-
+        else if(prev_col < 0){//left
+            for(int i = row-1; i <= row+1; i++){
+                for(int j = col; j <= col+1; j++){
+                    if(i == row && j == col){
+                        continue;
+                    }
+                    if(liveCellArray[i][j] == true){
+                        my_count++;
+                    }
+                }
+            }
+            //3 on very left side - on other side
+            if(liveCellArray[row-1][max_columns-1] == true){
+                my_count++;
+            }
+            if(liveCellArray[row][max_columns-1] == true){
+                my_count++;
+            }
+            if(liveCellArray[row+1][max_columns-1] == true){
+                my_count++;
+            }
         }
         else if(next_row >= max_rows){//bottom edge
-
+            for(int i = row-1; i <= row; i++){
+                for(int j = col-1; j <= col+1; j++){
+                    if(i == row && j == col){
+                        continue;
+                    }
+                    if(liveCellArray[i][j] == true){
+                        my_count++;
+                    }
+                }
+            }
+            //3 on very bottom - top side
+            if(liveCellArray[0][col-1] == true){
+                my_count++;
+            }
+            if(liveCellArray[0][col] == true){
+                my_count++;
+            }
+            if(liveCellArray[0][col+1] == true){
+                my_count++;
+            }
         }
         else if(next_col >= max_columns){//right edge
-
+            for(int i = row-1; i <= row+1; i++){
+                for(int j = col-1; j <= col; j++){
+                    if(i == row && j == col){
+                        continue;
+                    }
+                    if(liveCellArray[i][j] == true){
+                        my_count++;
+                    }
+                }
+            }
+            //check the very rightmost 3 - other side
+            if(liveCellArray[row-1][0] == true){
+                my_count++;
+            }
+            if(liveCellArray[row][0] == true){
+                my_count++;
+            }
+            if(liveCellArray[row+1][0] == true){
+                my_count++;
+            }
         }
         else{//interior cells
             for(int i = row-1; i <= row+1; i++){
                 for(int j = col-1; j <= col+1; j++){
+                    if(i == row && j == col){
+                        continue;
+                    }
                     if(liveCellArray[i][j] == true){
-                        if(i == row && j == col) {
-                            continue;
-                        }
                         my_count += 1;
                     }
                 }

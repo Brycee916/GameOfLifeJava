@@ -8,7 +8,7 @@ public class Main {
         slGoLBoard my_board;
         my_board = new slGoLBoardLive(9,9);
         my_board.printGoLBoard();
-        System.out.println(my_board.countLiveTwoDegreeNeighbors(1,1));
+        System.out.println(my_board.countLiveTwoDegreeNeighbors(3,8));
         test_1();
         test_2();
         test_3();

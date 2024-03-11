@@ -271,11 +271,10 @@ public class slGoLBoardLive extends slGoLBoard{
             for (int col = 0; col < max_columns; ++col) {
                 ccs = liveCellArray[row][col];
                 nln = countLiveTwoDegreeNeighbors(row, col);
-                if (!ccs && nln == 3) {
+                if (!ccs && nln == 3) { //current cell status is dead and nln is 3
                     nextCellArray[row][col] = true;
                     ++retVal;
-                } else {
-                    // Current Cell Status is true
+                } else if (ccs) {//current cell status is alive
                     if (nln < 2 || nln > 3) {
                         nextCellArray[row][col] = false;
                     } else {

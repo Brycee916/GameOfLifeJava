@@ -3,7 +3,7 @@ package csc133;
 
 public class Main {
     private static slGoLBoard my_board;
-    private static final int ROWS = 7, COLS = 9;
+    private static final int ROWS = 20, COLS = 18;
     public static void main(String[] args) {
         //my_board;
         //my_board = new slGoLBoardLive(9,9);
@@ -14,7 +14,8 @@ public class Main {
         //test_2();
         //test_3();
         //test_4();
-        test_5();
+        //test_5();
+        test_6();
     }
 
     // print TwoDegreeNeighbors(0,0)
@@ -63,6 +64,23 @@ public class Main {
         return;
     }
 
+    //print the board and updated board
+    private static void test_6() {
+        slGoLBoard my_board;
+        my_board = new slGoLBoardLive(ROWS, COLS);
+        System.out.println("GoL Board 20x18");
+        my_board.printGoLBoard();
+
+        System.out.println("\n\nLive cell array will now be next cell array & next will now be live");
+        System.out.println("Printing the updated live array when updateNextCellArray is called");
+        my_board.updateNextCellArray();
+        my_board.printGoLBoard();
+
+        System.out.println("\n\nCopying to next array to live array");
+        System.out.println("Printing the original live cell array");
+        my_board.copyNextToLive();
+        my_board.printGoLBoard();
+    }
 }
 
 
